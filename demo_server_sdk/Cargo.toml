@@ -1,0 +1,19 @@
+[package]
+name = "demo_server_sdk"
+version = "0.1.0"
+edition = "2021"
+
+[package.metadata.px.generate]
+generator_type = "cargo_workspace_binary"
+generator_name = "bp"
+
+[lints]
+clippy = { all = "allow" }
+
+[dependencies]
+demo = { version = "0.1.0", path = "../demo", package = "demo" }
+http = { version = "1.0.0", package = "http" }
+hyper = { version = "1.1.0", package = "hyper" }
+matchit = { version = "0.7.3", git = "https://github.com/ibraheemdev/matchit", branch = "master", package = "matchit" }
+pavex = { version = "0.1.0", git = "https://github.com/LukeMathWalker/pavex", branch = "main", package = "pavex" }
+thiserror = { version = "1.0.56", package = "thiserror" }

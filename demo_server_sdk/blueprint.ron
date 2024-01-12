@@ -1,0 +1,233 @@
+(
+    creation_location: (
+        line: 10,
+        column: 18,
+        file: "demo/src/blueprint.rs",
+    ),
+    constructors: [
+        (
+            constructor: (
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::path::PathParams::extract",
+                ),
+                location: (
+                    line: 264,
+                    column: 12,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/path/path_params.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: None,
+            error_handler: Some((
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::path::errors::ExtractPathParamsError::into_response",
+                ),
+                location: (
+                    line: 268,
+                    column: 10,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/path/path_params.rs",
+                ),
+            )),
+        ),
+        (
+            constructor: (
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::query::QueryParams::extract",
+                ),
+                location: (
+                    line: 193,
+                    column: 12,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/query/query_params.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: None,
+            error_handler: Some((
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::query::errors::ExtractQueryParamsError::into_response",
+                ),
+                location: (
+                    line: 197,
+                    column: 10,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/query/query_params.rs",
+                ),
+            )),
+        ),
+        (
+            constructor: (
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::body::JsonBody::extract",
+                ),
+                location: (
+                    line: 148,
+                    column: 12,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/body/json.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: None,
+            error_handler: Some((
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::body::errors::ExtractJsonBodyError::into_response",
+                ),
+                location: (
+                    line: 152,
+                    column: 10,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/body/json.rs",
+                ),
+            )),
+        ),
+        (
+            constructor: (
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::body::BufferedBody::extract",
+                ),
+                location: (
+                    line: 188,
+                    column: 12,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/body/buffered_body.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: None,
+            error_handler: Some((
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "pavex::request::body::errors::ExtractBufferedBodyError::into_response",
+                ),
+                location: (
+                    line: 192,
+                    column: 10,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/body/buffered_body.rs",
+                ),
+            )),
+        ),
+        (
+            constructor: (
+                callable: (
+                    registered_at: "pavex",
+                    import_path: "<pavex::request::body::BodySizeLimit as std::default::Default>::default",
+                ),
+                location: (
+                    line: 24,
+                    column: 12,
+                    file: "/Users/oliver/.cargo/git/checkouts/pavex-a9d3253b1c659390/c9e1478/libs/pavex/src/request/body/limit.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: None,
+            error_handler: None,
+        ),
+        (
+            constructor: (
+                callable: (
+                    registered_at: "demo",
+                    import_path: "crate::telemetry::RootSpan::new",
+                ),
+                location: (
+                    line: 41,
+                    column: 8,
+                    file: "demo/src/blueprint.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: Some(CloneIfNecessary),
+            error_handler: None,
+        ),
+        (
+            constructor: (
+                callable: (
+                    registered_at: "demo",
+                    import_path: "crate::user_agent::UserAgent::extract",
+                ),
+                location: (
+                    line: 15,
+                    column: 8,
+                    file: "demo/src/blueprint.rs",
+                ),
+            ),
+            lifecycle: RequestScoped,
+            cloning_strategy: None,
+            error_handler: Some((
+                callable: (
+                    registered_at: "demo",
+                    import_path: "crate::user_agent::invalid_user_agent",
+                ),
+                location: (
+                    line: 19,
+                    column: 6,
+                    file: "demo/src/blueprint.rs",
+                ),
+            )),
+        ),
+    ],
+    middlewares: [
+        (
+            middleware: (
+                callable: (
+                    registered_at: "demo",
+                    import_path: "crate::telemetry::logger",
+                ),
+                location: (
+                    line: 47,
+                    column: 8,
+                    file: "demo/src/blueprint.rs",
+                ),
+            ),
+            error_handler: None,
+        ),
+    ],
+    routes: [
+        (
+            path: "/api/ping",
+            method_guard: (
+                inner: Some((
+                    bitset: 256,
+                    extensions: [],
+                )),
+            ),
+            request_handler: (
+                callable: (
+                    registered_at: "demo",
+                    import_path: "crate::routes::status::ping",
+                ),
+                location: (
+                    line: 21,
+                    column: 8,
+                    file: "demo/src/blueprint.rs",
+                ),
+            ),
+            error_handler: None,
+        ),
+        (
+            path: "/api/greet/:name",
+            method_guard: (
+                inner: Some((
+                    bitset: 256,
+                    extensions: [],
+                )),
+            ),
+            request_handler: (
+                callable: (
+                    registered_at: "demo",
+                    import_path: "crate::routes::greet::greet",
+                ),
+                location: (
+                    line: 22,
+                    column: 8,
+                    file: "demo/src/blueprint.rs",
+                ),
+            ),
+            error_handler: None,
+        ),
+    ],
+    fallback_request_handler: None,
+    nested_blueprints: [],
+)
