@@ -8,13 +8,13 @@ pub enum UserAgent {
 }
 
 impl UserAgent {
-	pub fn extract(request_head: &RequestHead) -> Result<Self, ToStrError> {
-		let Some(user_agent) = request_head.headers.get(USER_AGENT) else {
-			return Ok(Self::Unknown);
-		};
+    pub fn extract(request_head: &RequestHead) -> Result<Self, ToStrError > {
+        let Some(user_agent) = request_head.headers.get(USER_AGENT) else {
+            return Ok(UserAgent::Unknown);
+        };
 
-		user_agent.to_str().map(|s| UserAgent::Known(s.into()))
-	}
+        user_agent.to_str().map(|s| UserAgent::Known(s.into()))
+    }
 }
 
 pub fn invalid_user_agent(_e: &ToStrError) -> Response {
