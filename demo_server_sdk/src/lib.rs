@@ -153,6 +153,7 @@ pub mod route_1 {
         let v3 = demo::telemetry::RootSpan::new(v2, v0);
         let v4 = crate::route_1::Next0 {
             s_0: v1,
+            s_1: v2,
             next: handler,
         };
         let v5 = pavex::middleware::Next::new(v4);
@@ -160,39 +161,56 @@ pub mod route_1 {
     }
     pub async fn handler(
         v0: pavex::request::path::RawPathParams<'_, '_>,
+        v1: &pavex::request::RequestHead,
     ) -> pavex::response::Response {
-        let v1 = pavex::request::path::PathParams::extract(v0);
-        let v2 = match v1 {
+        let v2 = demo::user_agent::UserAgent::extract(v1);
+        let v3 = match v2 {
             Ok(ok) => ok,
-            Err(v2) => {
+            Err(v3) => {
                 return {
-                    let v3 = pavex::request::path::errors::ExtractPathParamsError::into_response(
-                        &v2,
-                    );
+                    let v4 = demo::user_agent::invalid_user_agent(&v3);
                     <pavex::response::Response as pavex::response::IntoResponse>::into_response(
-                        v3,
+                        v4,
                     )
                 };
             }
         };
-        let v3 = demo::routes::greet::greet(v2);
-        <pavex::response::Response as pavex::response::IntoResponse>::into_response(v3)
+        let v4 = pavex::request::path::PathParams::extract(v0);
+        let v5 = match v4 {
+            Ok(ok) => ok,
+            Err(v5) => {
+                return {
+                    let v6 = pavex::request::path::errors::ExtractPathParamsError::into_response(
+                        &v5,
+                    );
+                    <pavex::response::Response as pavex::response::IntoResponse>::into_response(
+                        v6,
+                    )
+                };
+            }
+        };
+        let v6 = demo::routes::greet::greet(v5, v3);
+        <pavex::response::Response as pavex::response::IntoResponse>::into_response(v6)
     }
-    pub struct Next0<'a, 'b, T>
+    pub struct Next0<'a, 'b, 'c, T>
     where
         T: std::future::Future<Output = pavex::response::Response>,
     {
         s_0: pavex::request::path::RawPathParams<'a, 'b>,
-        next: fn(pavex::request::path::RawPathParams<'a, 'b>) -> T,
+        s_1: &'c pavex::request::RequestHead,
+        next: fn(
+            pavex::request::path::RawPathParams<'a, 'b>,
+            &'c pavex::request::RequestHead,
+        ) -> T,
     }
-    impl<'a, 'b, T> std::future::IntoFuture for Next0<'a, 'b, T>
+    impl<'a, 'b, 'c, T> std::future::IntoFuture for Next0<'a, 'b, 'c, T>
     where
         T: std::future::Future<Output = pavex::response::Response>,
     {
         type Output = pavex::response::Response;
         type IntoFuture = T;
         fn into_future(self) -> Self::IntoFuture {
-            (self.next)(self.s_0)
+            (self.next)(self.s_0, self.s_1)
         }
     }
 }
